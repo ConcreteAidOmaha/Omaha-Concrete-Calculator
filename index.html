@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omaha Concrete Calculator | ConcreteAid</title>
+    <meta name="description" content="Free concrete calculator for Omaha homeowners and contractors. Calculate concrete needs for driveways, patios, and foundations in Nebraska.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #f60a0a, #2c3e50);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.2em;
+        }
+
+        .calculator {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ecf0f1;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #f60a0a;
+            box-shadow: 0 0 0 3px rgba(246, 10, 10, 0.1);
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+
+        .calculate-btn {
+            background: linear-gradient(45deg, #f60a0a, #d40909);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(246, 10, 10, 0.3);
+        }
+
+        .results {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+            display: none;
+        }
+
+        .results h3 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 1.1em;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .business-info {
+            background: #34495e;
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .business-info h3 {
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .business-info p {
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .contact-btn {
+            background: #f60a0a;
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-top: 15px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            background: #d40909;
+            transform: translateY(-2px);
+        }
+
+        .tips {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+
+        .tips h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .tips ul {
+            list-style-position: inside;
+            color: #5a6c7d;
+            line-height: 1.6;
+        }
+
+        .tips li {
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .row {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏗️ Omaha Concrete Calculator</h1>
+            <p>Calculate your concrete needs for driveways, patios, and Parking lots in Omaha Nebraska</p>
+        </div>
+
+        <div class="calculator">
+            <form id="concreteForm">
+                <div class="form-group">
+                    <label for="project-type">Project Type:</label>
+                    <select id="project-type" required>
+                        <option value="">Select project type</option>
+                        <option value="driveway">Driveway</option>
+                        <option value="patio">Patio</option>
+                        <option value="sidewalk">Sidewalk</option>
+                        <option value="slab">Concrete Slab</option>
+                        <option value="pool-deck">Pool Deck</option>
+                        <option value="parking-lot">Parking Lot</option>
+                    </select>
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <label for="length">Length (feet):</label>
+                        <input type="number" id="length" step="0.1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="width">Width (feet):</label>
+                        <input type="number" id="width" step="0.1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="thickness">Thickness (inches):</label>
+                        <input type="number" id="thickness" step="0.25" value="4" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="calculate-btn">Calculate Concrete Needs</button>
+            </form>
+        </div>
+
+        <div id="results" class="results">
+            <h3>📊 Your Concrete Requirements</h3>
+            <div class="result-item">
+                <span>Cubic Yards Needed:</span>
+                <span id="cubic-yards">-</span>
+            </div>
+            <div class="result-item">
+                <span>Cubic Feet:</span>
+                <span id="cubic-feet">-</span>
+            </div>
+            <div class="result-item">
+                <span>Estimated Cost:</span>
+                <span id="estimated-cost">-</span>
+            </div>
+            <div class="result-item">
+                <span>80lb Bags Needed:</span>
+                <span id="bags-needed">-</span>
+            </div>
+        </div>
+
+        <div class="business-info">
+            <h3>🏆 Professional Concrete Services in Omaha</h3>
+            <p><strong>ConcreteAid</strong> - Your trusted concrete contractor serving Omaha, Nebraska</p>
+            <p>📍 663 N 132nd St STE 145, Omaha, NE 68154</p>
+            <p>📞 (402) 715-9750</p>
+            <p>🌐 Serving Omaha and surrounding cities including Elkhorn, Papillion, La Vista, Bellevue</p>
+            <a href="https://concreteaid.com/" class="contact-btn" target="_blank">Visit ConcreteAid.com</a>
+        </div>
+
+        <div class="tips">
+            <h3>🌨️ Nebraska Concrete Tips</h3>
+            <ul>
+                <li><strong>Winter Planning:</strong> Best concrete pours in Omaha are April-October due to freeze-thaw cycles</li>
+                <li><strong>Soil Considerations:</strong> Nebraska's clay soil requires proper base preparation and drainage</li>
+                <li><strong>Thickness Recommendations:</strong> 4" for walkways, 5-6" for driveways, 6-8" for heavy vehicle areas</li>
+                <li><strong>Air Entrainment:</strong> Essential for Nebraska's winter weather - increases freeze-thaw resistance</li>
+                <li><strong>Curing Time:</strong> Allow extra curing time during humid Omaha summers for optimal strength</li>
+                <li><strong>ConcreteAid Expertise:</strong> Specializing in driveways, patios, sidewalks, and decorative concrete throughout Omaha</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('concreteForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const length = parseFloat(document.getElementById('length').value);
+            const width = parseFloat(document.getElementById('width').value);
+            const thickness = parseFloat(document.getElementById('thickness').value);
+            
+            // Calculate cubic feet
+            const cubicFeet = (length * width * thickness) / 12;
+            
+            // Convert to cubic yards
+            const cubicYards = cubicFeet / 27;
+            
+            // Add 10% waste factor
+            const cubicYardsWithWaste = cubicYards * 1.1;
+            
+            // Estimate cost (Omaha average: $100-$150 per cubic yard installed)
+            const estimatedCost = cubicYardsWithWaste * 125;
+            
+            // Calculate 80lb bags needed (covers ~0.6 cubic feet each)
+            const bagsNeeded = Math.ceil(cubicFeet * 1.1 / 0.6);
+            
+            // Display results
+            document.getElementById('cubic-yards').textContent = cubicYardsWithWaste.toFixed(2);
+            document.getElementById('cubic-feet').textContent = (cubicFeet * 1.1).toFixed(2);
+            document.getElementById('estimated-cost').textContent = '$' + estimatedCost.toLocaleString('en-US', {maximumFractionDigits: 0});
+            document.getElementById('bags-needed').textContent = bagsNeeded;
+            
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
