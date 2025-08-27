@@ -6,7 +6,7 @@
 [![Call Now](https://img.shields.io/badge/Call%20Now-(402)%20715--9750-green)](tel:4027159750)
 
 ## 🌐 Live Calculator
-**[Calculate Your Concrete Needs →](https://ConcreteAidOmaha.github.io/omaha-concrete-calculator/)**
+**[Calculate Your Concrete Needs →]((https://github.com/ConcreteAidOmaha/Omaha-Concrete-Calculator/)**
 
 Calculate exactly how much concrete you need for your Omaha project:
 - ✅ Driveways & Patios
